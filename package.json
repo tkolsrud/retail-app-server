@@ -2,7 +2,11 @@
   "name": "retail-app-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
+  "type": "module",
+  "bin": {
+    "mern-jwt-template-back-end": "bin/www.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
