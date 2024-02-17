@@ -33,11 +33,40 @@ async function signup(req, res) {
   }
 }
 
-// Helper Functions
+async function login(req, res) {
+  try {
+    if (!process.env.SECRET) throw new Error('no SECRET in back-end .env file')
+    if (!process.env.CLOUDINARY_URL) {
+      throw new Error('no CLOUDINARY_URL in back-end .env file')
+    }
 
+    const user = await User.findOne({ email: req.body.email })
+    if (!user) throw new Error('User not found')
+
+    const isMatch = await user.comparePassword(req.body.password)
+    if (!isMatch) throw new Error('Incorrect password') 
+
+    const token = createJWT(user)
+    res.json({ token })
+  } catch (err) {
+    handleAuthError(err, res)
+  }
+}
+
+// Helper Functions
 function createJWT(user) {
   // return jwt.sign({ user }, process.env.SECRET, { expiresIn: ''})
   return jwt.sign({ user }, process.env.SECRET)
 }
 
-export { signup }
+function handleAuthError(err, res) {
+  console.log(err)
+  const { message } = err
+  if (message === 'User not found' || message === 'Incorrect password') {
+    res.status(401).json({ err: message })
+  } else {
+    res.status(500).json({ err: message })
+  }
+}
+
+export { signup, login }
