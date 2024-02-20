@@ -1,14 +1,5 @@
 import axios from 'axios'
 
-
-// To Dos:
-
-// Index
-  // Index All DONE
-  // Index Categories DONE
-  // Index One Category DONE
-// Show One Product
-
 async function indexAllProducts(req, res) {
   try {
     const products = await axios.get('https://fakestoreapi.com/products')
