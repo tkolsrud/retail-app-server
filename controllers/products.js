@@ -12,7 +12,7 @@ import axios from 'axios'
   // Index women's clothing
 // Show
 
-async function index(req, res) {
+async function indexAllProducts(req, res) {
   try {
     const products = await axios.get('https://fakestoreapi.com/products')
     res.status(200).json(products.data)
@@ -22,6 +22,18 @@ async function index(req, res) {
   }
 }
 
-export {
-  index as allProducts,
+async function indexCategories(req, res) {
+  try {
+    const categories = await axios.get('https://fakestoreapi.com/products/categories')
+    res.status(200).json(categories.data)
+  } catch(err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
 }
+
+export {
+  indexAllProducts as allProducts,
+  indexCategories as allCategories,
+}
+

@@ -6,7 +6,8 @@ import * as productsCtrl from '../controllers/products.js'
 const router = Router()
 
 // Public Routes
-router.get('/', productsCtrl.allProducts)
+router.get('/all', productsCtrl.allProducts)
+router.get('/categories', productsCtrl.allCategories)
 
 // Protected Routes
 router.use(decodeUserFromToken)
