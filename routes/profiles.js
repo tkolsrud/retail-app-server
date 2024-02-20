@@ -10,6 +10,7 @@ const router = Router()
 router.use(decodeUserFromToken)
 router.get('/', checkAuth, profilesCtrl.index)
 router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
-router.post('/:id/add-to-cart', checkAuth, profilesCtrl.addToCart)
+router.post('/:id/cart', checkAuth, profilesCtrl.addToCart)
+router.patch('/:id/cart', checkAuth, profilesCtrl.removeFromCart)
 
 export { router }

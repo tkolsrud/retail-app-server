@@ -1,6 +1,9 @@
 import { Profile } from '../models/profile.js'
 import { v2 as cloudinary } from 'cloudinary'
 
+
+// Profile Controllers
+
 async function index(req, res) {
   try {
     const profiles = await Profile.find({})
@@ -32,6 +35,9 @@ async function addPhoto(req, res) {
   }
 }
 
+
+// Shopping Cart Controllers 
+
 async function addToCart(req, res) {
   try {
     const profile = await Profile.findById(req.params.id)
@@ -46,8 +52,29 @@ async function addToCart(req, res) {
   }
 }
 
+async function removeFromCart(req, res) {
+  try {
+    const profile = await Profile.findOneAndUpdate({
+      _id: req.params.id
+    }, {
+      $pull: {
+        cart: {
+          _id: req.body._id
+        }
+      }
+    })
+    profile.save()
+
+    res.status(200).json(profile.cart)
+  } catch(err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
+}
+
 export { 
     index, 
     addPhoto,
-    addToCart
+    addToCart,
+    removeFromCart
    }
