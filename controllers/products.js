@@ -4,7 +4,7 @@ import axios from 'axios'
 // To Dos:
 
 // Index
-  // Index All
+  // Index All DONE
   // Index Categories
   // Index electronics
   // Index jewelry
