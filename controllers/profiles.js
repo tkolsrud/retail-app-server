@@ -32,4 +32,22 @@ async function addPhoto(req, res) {
   }
 }
 
-export { index, addPhoto }
+async function addToCart(req, res) {
+  try {
+    const profile = await Profile.findById(req.params.id)
+    profile.cart.push(req.body)
+    await profile.save()
+
+    res.status(201).json(profile.cart)
+  } catch(err) {
+    console.log(err)
+    res.status(500).json(err)
+
+  }
+}
+
+export { 
+    index, 
+    addPhoto,
+    addToCart
+   }
