@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const productSchema = new Schema ({
+  fakestoreId: Number,
   title: String,
   price: Number,
   description: String,
