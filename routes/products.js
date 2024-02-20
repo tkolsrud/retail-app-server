@@ -8,6 +8,7 @@ const router = Router()
 // Public Routes
 router.get('/all', productsCtrl.allProducts)
 router.get('/categories', productsCtrl.allCategories)
+router.get('/:category', productsCtrl.categoryDetail)
 
 // Protected Routes
 router.use(decodeUserFromToken)
